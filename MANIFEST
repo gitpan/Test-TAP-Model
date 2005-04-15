@@ -1,0 +1,15 @@
+Build.PL
+example.pl
+lib/Test/TAP/Model.pm
+lib/Test/TAP/Model/File.pm
+lib/Test/TAP/Model/Subtest.pm
+Makefile.PL
+MANIFEST			This list of files
+META.yml
+t/00_dist.t
+t/basic.t
+t/comprehensive.t
+t/oop_file.t
+t/oop_subtest.t
+t/serializable.t
+SIGNATURE    Added here by Module::Build
