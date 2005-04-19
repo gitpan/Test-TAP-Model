@@ -15,23 +15,23 @@ not run its Makefile.PL or Build.PL.
 Hash: SHA1
 
 SHA1 1b5e77fa316acdc7c3c21d42b6f5c9b40f5d329a Build.PL
-SHA1 74784af2325cd42f4ce6632a58ef2ccb7c194e5e MANIFEST
-SHA1 1416184bdfe432868079e1378309a105a536d13c META.yml
+SHA1 ceaacc39ab1bab74f03b690c847a5fb46ea39c38 MANIFEST
+SHA1 dc679f5248dc80c845ad33cfa8150a750c79ec4a META.yml
 SHA1 33c79edb6a941304cc910c3d548754b1dc7d3cd1 Makefile.PL
-SHA1 99baf48a82d52f977d4485ee5b1f68da8e821e8a example.pl
-SHA1 23ed24537ca0d43a6bc0a7071f0d849770c0f952 lib/Test/TAP/Model.pm
-SHA1 936fea8355d18cb10121df72a2dc21a372a5221f lib/Test/TAP/Model/File.pm
-SHA1 6ee64116e61fe87d387edf049ee8e347d9651d54 lib/Test/TAP/Model/Subtest.pm
+SHA1 359387ff3af5b5f08ac6453c82cb2c4e08504748 lib/Test/TAP/Model.pm
+SHA1 7a0a890cb6726f046bcf411179a222d555cb0f16 lib/Test/TAP/Model/File.pm
+SHA1 b8bd97b8773019cfac29262d61d7af98dc824602 lib/Test/TAP/Model/Subtest.pm
 SHA1 c04440d94389ed001b94cdec72080305ed7d9648 t/00_dist.t
 SHA1 d9edf6b4bf46f92dff03e9fb76048bf5c4a7f3b0 t/basic.t
-SHA1 780d5ae2e177cfdfcb9dd345e770afc3c5877e26 t/comprehensive.t
+SHA1 c6e53bd7ab3a2112225a93c8c0d0044a112cc8ca t/comprehensive.t
 SHA1 dd3f2a8b23b4a04c2da45e1363e240d906c6fc98 t/oop_file.t
 SHA1 4eb74f2a087f15e1c7f07f93d3c689be55ee740e t/oop_subtest.t
+SHA1 30676ba486ac3f1ea853ac85e5142142c2cf9899 t/pos_guessing.t
 SHA1 2120d63b75de8443f81b01d737daaed32db882ea t/serializable.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.2.5 (Darwin)
 
-iD8DBQFCYE3xVCwRwOvSdBgRApEdAJ9EirukSLrZwyodgPsSQvAICrIaAwCcCSHQ
-Jutgt1BAGiygPePg/PgFrfo=
-=JV3y
+iD8DBQFCZT0kVCwRwOvSdBgRAmDRAJ4yVjkEpZ3n8TdJ2dXXUD9ECTMvmQCdEFYr
+P4d5v7Qpb1qbQyolhF/wSM4=
+=doBR
 -----END PGP SIGNATURE-----

@@ -10,7 +10,7 @@ use Test::TAP::Model::File;
 
 use List::Util qw/sum/;
 
-our $VERSION = "0.02";
+our $VERSION = "0.03";
 
 # callback handlers
 sub _handle_bailout {
@@ -74,10 +74,11 @@ sub _handle_test {
 sub _handle_other {
 	my($self, $line, $type, $totals) = @_;
 
-	if (@{ $self->{meat}{test_files} } > 0) {
-		$self->latest_event->{diag} .= $line;
+	my $last_test = $self->{meat}{test_files}[-1];
+	if (@{ $last_test->{events} ||= [] } > 0) {
+		($self->latest_event->{diag} ||= "") .= "$line\n";
 	} else {
-		($self->{meat}{test_files}[-1]{pre_diag} ||= "") .= $line;
+		($last_test->{pre_diag} ||= "") .= "$line\n";
 	}
 }
 
@@ -190,7 +191,7 @@ sub test_files {
 
 sub ok { $_->ok or return for $_[0]->test_files; 1 }; *passed = \&ok; *passing = \&ok;
 sub nok { !$_[0]->ok }; *failing = \&nok; *failed = \&nok;
-sub total_ratio { return $_ ? $_[0]->total_passed / $_ : 1 for $_[0]->total_seen }; *ratio = \&total_ratio;
+sub total_ratio { return $_ ? $_[0]->total_passed / $_ : ($_[0]->ok ? 1 : 0) for $_[0]->total_seen }; *ratio = \&total_ratio;
 sub total_percentage { sprintf("%.2f%%", 100 * $_[0]->total_ratio) }
 sub total_seen { sum map { scalar $_->seen } $_[0]->test_files }
 sub total_todo { sum map { scalar $_->todo_tests } $_[0]->test_files }

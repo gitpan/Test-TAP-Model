@@ -49,7 +49,7 @@ sub _test_structs {
 			my %bailed = (
 				type => "test",
 				ok => 0,
-				line => "Bail out!",
+				line => "stub",
 			);
 
 			for my $num (@cases + 1 .. $max) {
@@ -82,6 +82,7 @@ sub cases {
 	my $scalar = List::Util::max(@values);
 	$_[0]->_c(sub { 1 }, $scalar)
 }; *seen_tests = *seen = *test_cases = *subtests = \&cases;
+sub actual_cases { $_[0]->_c(sub { $_->{line} ne "stub" }, ${ $_[0] }->{results}{seen}) }
 sub ok_tests { $_[0]->_c(sub { $_->{ok} }, ${ $_[0] }->{results}{ok}) }; *passed_tests = \&ok_tests;
 sub nok_tests { $_[0]->_c(sub { not $_->{ok} }, $_[0]->seen - $_[0]->ok_tests )}; *failed_tests = \&nok_tests;
 sub todo_tests { $_[0]->_c(sub { $_->{todo} }, ${ $_[0] }->{results}{todo}) }
@@ -90,13 +91,15 @@ sub unexpectedly_succeeded_tests { $_[0]->_c(sub { $_->{todo} and $_->{actual_ok
 
 sub ratio {
 	my $self = shift;
-	$self->ok_tests / $self->seen;
+	$self->seen ? $self->ok_tests / $self->seen : ($self->ok ? 1 : 0); # no tests is an error
 }
 
 sub percentage {
 	my $self = shift;
 	sprintf("%.2f%%", 100 * $self->ratio);
 }
+
+sub pre_diag { ${ $_[0] }->{pre_diag} || ""}
 
 __PACKAGE__
 
@@ -201,6 +204,14 @@ The name of the test file.
 In scalar context, a number, in list context, a list of
 L<Test::TAP::Model::Subtest> objects
 
+This value is somewhat massaged, with stubs created for planned tests which
+were never reached.
+
+=item actual_cases
+
+This method returns the same thing as C<cases> and friends, but without the
+stubs.
+
 =item max
 
 =item planned
@@ -245,5 +256,9 @@ OK/(max seen, planned)
 =item percentage
 
 Pretty printed ratio in percentage, with two decimal points and a percent sign.
+
+=item pre_diag
+
+Any diagnosis output seen in TAP that came before a subtest.
 
 =cut

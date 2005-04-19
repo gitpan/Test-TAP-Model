@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name: Test-TAP-Model
-version: 0.02
+version: 0.03
 author: ~
 abstract: |-
   Accessible (queryable, serializable object) result collector
@@ -13,7 +13,7 @@ build_requires:
 provides:
   Test::TAP::Model:
     file: lib/Test/TAP/Model.pm
-    version: 0.02
+    version: 0.03
   Test::TAP::Model::File:
     file: lib/Test/TAP/Model/File.pm
     version: 0.02
