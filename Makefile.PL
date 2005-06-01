@@ -7,7 +7,7 @@ WriteMakefile
           'NAME' => 'Test::TAP::Model',
           'VERSION_FROM' => 'lib/Test/TAP/Model.pm',
           'PREREQ_PM' => {
-                           'Test::More' => 0
+                           'Test::More' => '0.53'
                          }
         )
 ;
