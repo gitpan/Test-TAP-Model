@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.44.
+signed via the Module::Signature module, version 0.52.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,24 +14,28 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 7feca414e773a658888f29f55b96d0a50dd5565a Build.PL
-SHA1 1e30f5b45a74daadca016609e509565a58e9a2f2 MANIFEST
-SHA1 1568ac3da62cf86a1df7814b5a064f1e59752a3a META.yml
-SHA1 29345d0f77506af9c517669e9de86975ad62f855 Makefile.PL
-SHA1 70279d6e3472f9e20b62d036863979648906c412 lib/Test/TAP/Model.pm
-SHA1 9050eb2cf46ccb2b4107d37af1447b13ecc10585 lib/Test/TAP/Model/File.pm
-SHA1 7a94fe5b4ed16ebf6ee3e49b20eb3ff26426d810 lib/Test/TAP/Model/Subtest.pm
-SHA1 acbd2a8d9b17e5c3db037b0c1ad46367428a8ba5 t/00_dist.t
+SHA1 4e3fd79a00cba1ee1728f7d4ed4e6d8f13c7ee47 Build.PL
+SHA1 f5ee1971eecc2a19db2f3d7fb1a5999043207d8e MANIFEST
+SHA1 0d4a69ab7d4264e9718494b2733c669b8e367d8c META.yml
+SHA1 0d3a7847a83b473788ffec39e842ff945dfc003d Makefile.PL
+SHA1 71f34d2e8b9d99b59f393814a26372217e961c44 example.pl
+SHA1 7a7b10873ec748be6711e5bd2ea98dec5b9b7017 lib/Test/TAP/Model.pm
+SHA1 442be97cdb5e0dc4f2fcd5abea656fa83a37dd56 lib/Test/TAP/Model/Consolidated.pm
+SHA1 10d4115afe4bbae455cf608d1ed6edda0fa281c3 lib/Test/TAP/Model/File.pm
+SHA1 6b1c7072e575bbfc6087b14c345dbf59ae487cf2 lib/Test/TAP/Model/File/Consolidated.pm
+SHA1 6fab02a357fa700e236449e0fe314845a23b6968 lib/Test/TAP/Model/Subtest.pm
 SHA1 ef8d4cb8e9085b90c6c5b3437e6df73e8d5e0f91 t/basic.t
-SHA1 c6e53bd7ab3a2112225a93c8c0d0044a112cc8ca t/comprehensive.t
+SHA1 ae8f1c14b14764483e9bb61c663486ae7349d3e4 t/comprehensive.t
+SHA1 d7ba14c7859bc764ed4469641a4b3db37c7106d1 t/consolidate.t
+SHA1 dadc9e1b36b43e1e8738c85091e24ee69292f9b2 t/lib/StringHarness.pm
 SHA1 dd3f2a8b23b4a04c2da45e1363e240d906c6fc98 t/oop_file.t
 SHA1 4eb74f2a087f15e1c7f07f93d3c689be55ee740e t/oop_subtest.t
 SHA1 30676ba486ac3f1ea853ac85e5142142c2cf9899 t/pos_guessing.t
 SHA1 2120d63b75de8443f81b01d737daaed32db882ea t/serializable.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.2.5 (Darwin)
+Version: GnuPG v1.4.1 (Darwin)
 
-iD8DBQFCnaE6VCwRwOvSdBgRAjAeAJ9D7GKN3VI0/bR6sMdNxzY3nSACywCfaVZT
-08rTspPuvbBZpkeB7cFcRtQ=
-=BBV7
+iD8DBQFEKDMSVCwRwOvSdBgRAnZ/AKCfuCxQssXThAqE97aijJ8pgpNnDwCgiZms
+J4fxZWXrUFdHnILXKD4V4V4=
+=f0Fo
 -----END PGP SIGNATURE-----

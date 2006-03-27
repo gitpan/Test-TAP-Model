@@ -2,12 +2,13 @@
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
-          'PL_FILES' => {},
-          'INSTALLDIRS' => 'site',
           'NAME' => 'Test::TAP::Model',
           'VERSION_FROM' => 'lib/Test/TAP/Model.pm',
           'PREREQ_PM' => {
+                           'Method::Alias' => '0',
                            'Test::More' => '0.53'
-                         }
+                         },
+          'INSTALLDIRS' => 'site',
+          'PL_FILES' => {}
         )
 ;

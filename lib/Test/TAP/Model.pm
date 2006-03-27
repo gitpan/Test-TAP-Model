@@ -10,7 +10,7 @@ use Test::TAP::Model::File;
 
 use List::Util qw/sum/;
 
-our $VERSION = "0.04";
+our $VERSION = "0.06";
 
 # callback handlers
 sub _handle_bailout {
@@ -192,8 +192,12 @@ sub file_class { "Test::TAP::Model::File" }
 
 sub test_files {
 	my $self = shift;
-	$self->{_test_files_cache} ||= [ map { $self->file_class->new($_) } @{ $self->{meat}{test_files} } ];
-	@{ $self->{_test_files_cache} }
+	@{$self->{_test_files_cache} ||= [ $self->get_test_files ]};
+}
+
+sub get_test_files {
+	my $self = shift;
+	map { $self->file_class->new($_) } @{ $self->{meat}{test_files} };
 }
 
 sub ok { $_->ok or return for $_[0]->test_files; 1 }; *passed = \&ok; *passing = \&ok;
@@ -206,6 +210,15 @@ sub total_skipped { sum map { scalar $_->skipped_tests } $_[0]->test_files }
 sub total_passed { sum map { scalar $_->ok_tests } $_[0]->test_files }; *total_ok = \&total_passed;
 sub total_failed { sum map { scalar $_->nok_tests } $_[0]->test_files }; *total_nok = \&total_failed;
 sub total_unexpectedly_succeeded { sum map { scalar $_->unexpectedly_succeeded_tests } $_[0]->test_files }
+
+sub summary {
+	my $self = shift;
+	$self->{_summary} ||=
+	sprintf "%d test cases: %d ok, %d failed, %d todo, "
+			."%d skipped and %d unexpectedly succeeded",
+			map { my $m = "total_$_"; $self->$m }
+			qw/seen passed failed todo skipped unexpectedly_succeeded/;
+}
 
 __PACKAGE__
 
@@ -220,15 +233,30 @@ for L<Test::Harness::Straps> runs.
 
 =head1 SYNOPSIS
 
-	use Test::TAP::Model
+	use Test::TAP::Model;
 
-	my $t = Test::TAP::Model->new($structure);
+	my $t = Test::TAP::Model->new();
 
-	my @tests = $t->test_files; # objects interface
+	# Test::Harness::Straps methods are available, but they aren't enough.
+	# Extra book keeping is required. See the run_test method
 
-	YAML::Dump($t->structure); # the same thing we made it with
+	# here's a convenient wrapper
+	$t = Test::TAP::Model->new_with_tests(glob("t/*.t"));
+	
+	# that's shorthand for new->run_tests
+	$t->run_tests(qw{ t/foo.t t/bar.t });
 
-	$t->run_tests(qw{ t/foo.t t/bar.t }); # has a side effect of creating struct
+	# every file is an object (Test::TAP::Model::File)
+	my @tests = $t->test_files;
+
+	# this method returns a structure
+	my $structure = $t->structure;
+
+	# which is guaranteed to survive serialization
+	my $other_struct = do { my $VAR; eval Data::Dumper::Dumper($structure) };
+
+	# the same as $t1
+	my $t2 = Test::TAP::Model->new_with_struct($other_struct);
 
 =head1 DESCRIPTION
 
