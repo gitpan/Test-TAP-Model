@@ -10,7 +10,7 @@ use Test::TAP::Model::File;
 
 use List::Util qw/sum/;
 
-our $VERSION = "0.06";
+our $VERSION = "0.07";
 
 # callback handlers
 sub _handle_bailout {
@@ -31,7 +31,7 @@ sub _handle_bailout {
         
 sub _handle_test {
 	my($self, $line, $type, $totals) = @_;
-	my $curr = $totals->{seen}||0;
+	my $curr = $totals->seen || 0;
 
 	# this is used by pugs' Test.pm, it's rather useful
 	my $pos;
@@ -40,7 +40,7 @@ sub _handle_test {
 		$pos = $2;
 	}
 
-	my %details = %{ $totals->{details}[-1] };
+	my %details = %{ $totals->details->[-1] };
 
 	$self->log_event(
 		type      => 'test',
@@ -48,7 +48,7 @@ sub _handle_test {
 		ok        => $details{ok},
 		actual_ok => $details{actual_ok},
 		str       => $details{ok} # string for people
-		             	? "ok $curr/$totals->{max}"
+		             	? "ok $curr/" . $totals->max
 		             	: "NOK $curr",
 		todo      => ($details{type} eq 'todo'),
 		skip      => ($details{type} eq 'skip'),
@@ -117,6 +117,8 @@ sub _init {
 		my $meth = "_handle_$type";
 		$self->$meth($line, $type, $totals) if $self->can($meth);
 	};
+
+	$s->SUPER::_init( @_ );
 }
 
 sub log_time {
@@ -169,9 +171,9 @@ sub run_test {
 
 	my $test_file = $self->start_file($file);
 	
-	my %results = eval { $self->analyze_file($file) };
-	$test_file->{results} = \%results;
-	delete $test_file->{results}{details};
+	my $results = eval { $self->analyze_file($file) } || Test::Harness::Results->new;
+	$test_file->{results} = $results;
+	$test_file->{results}->details(undef); # we don't need that
 
 	$test_file;
 }
@@ -512,6 +514,12 @@ of a hack because I'm not quite sure if L<Test::Harness::Straps> has the proper
 events to encapsulate this cleanly (Gaal took care of the handlers way before I
 got into the picture), and I'm too lazy to check it out.
 
+=head1 VERSION CONTROL
+
+This module is maintained using Darcs. You can get the latest version from
+L<http://nothingmuch.woobling.org/Test-TAP-Model/>, and use C<darcs send> to
+commit changes.
+
 =head1 AUTHORS
 
 This list was generated from svn log testgraph.pl and testgraph.css in the pugs
@@ -545,7 +553,7 @@ putter (svn handle)
 
 =item *
 
-Autrijs Tang <autrijus@autrjius.org> AUTRIJUS
+Audrey Tang <cpan@audreyt.org> AUDREYT
 
 =item *
 

@@ -1,10 +1,11 @@
-Build.PL
+Changes
 example.pl
 lib/Test/TAP/Model.pm
 lib/Test/TAP/Model/Consolidated.pm
 lib/Test/TAP/Model/File.pm
 lib/Test/TAP/Model/File/Consolidated.pm
 lib/Test/TAP/Model/Subtest.pm
+Makefile
 Makefile.PL
 MANIFEST			This list of files
 META.yml
@@ -16,4 +17,4 @@ t/oop_file.t
 t/oop_subtest.t
 t/pos_guessing.t
 t/serializable.t
-SIGNATURE    Added here by Module::Build
+SIGNATURE                                Public-key signature (added by MakeMaker)
