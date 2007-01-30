@@ -14,7 +14,7 @@
 #     INSTALLDIRS => q[site]
 #     NAME => q[Test::TAP::Model]
 #     PL_FILES => {  }
-#     PREREQ_PM => { Test::More=>q[0.53], Test::Harness=>q[2.64], Hash::AsObject=>q[0], Method::Alias=>q[0] }
+#     PREREQ_PM => { Test::More=>q[0.53], Test::Harness=>q[2.64], Method::Alias=>q[0] }
 #     SIGN => q[1]
 #     VERSION_FROM => q[lib/Test/TAP/Model.pm]
 
@@ -56,11 +56,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = Test::TAP::Model
 NAME_SYM = Test_TAP_Model
-VERSION = 0.07
+VERSION = 0.08
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_07
+VERSION_SYM = 0_08
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.07
+XS_VERSION = 0.08
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -187,9 +187,7 @@ PERL_ARCHIVE_AFTER =
 
 
 TO_INST_PM = example.pl \
-	lib/Test/TAP/.Model.pm.swp \
 	lib/Test/TAP/Model.pm \
-	lib/Test/TAP/Model/.File.pm.swp \
 	lib/Test/TAP/Model/Consolidated.pm \
 	lib/Test/TAP/Model/File.pm \
 	lib/Test/TAP/Model/File/Consolidated.pm \
@@ -197,16 +195,12 @@ TO_INST_PM = example.pl \
 
 PM_TO_BLIB = lib/Test/TAP/Model/File.pm \
 	blib/lib/Test/TAP/Model/File.pm \
-	lib/Test/TAP/Model/Subtest.pm \
-	blib/lib/Test/TAP/Model/Subtest.pm \
-	lib/Test/TAP/.Model.pm.swp \
-	blib/lib/Test/TAP/.Model.pm.swp \
 	lib/Test/TAP/Model.pm \
 	blib/lib/Test/TAP/Model.pm \
 	lib/Test/TAP/Model/Consolidated.pm \
 	blib/lib/Test/TAP/Model/Consolidated.pm \
-	lib/Test/TAP/Model/.File.pm.swp \
-	blib/lib/Test/TAP/Model/.File.pm.swp \
+	lib/Test/TAP/Model/Subtest.pm \
+	blib/lib/Test/TAP/Model/Subtest.pm \
 	example.pl \
 	$(INST_LIB)/Test/TAP/example.pl \
 	lib/Test/TAP/Model/File/Consolidated.pm \
@@ -277,7 +271,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Test-TAP-Model
-DISTVNAME = Test-TAP-Model-0.07
+DISTVNAME = Test-TAP-Model-0.08
 
 
 # --- MakeMaker macro section:
@@ -461,11 +455,17 @@ manifypods : pure_all  \
 
 # --- MakeMaker subdirs section:
 
-# none
+# The default clean, realclean and test targets in this Makefile
+# have automatically been given entries for each subdir.
+
+
+subdirs ::
+	$(NOECHO) cd Test-TAP-Model-0.07 && $(MAKE) $(USEMAKEFILE) $(FIRST_MAKEFILE) all $(PASTHRU)
+
 
 # --- MakeMaker clean_subdirs section:
 clean_subdirs :
-	$(NOECHO) $(NOOP)
+	$(ABSPERLRUN)  -e 'chdir '\''Test-TAP-Model-0.07'\'';  system '\''$(MAKE) clean'\'' if -f '\''$(FIRST_MAKEFILE)'\'';' --
 
 
 # --- MakeMaker clean section:
@@ -485,10 +485,10 @@ clean :: clean_subdirs
 	  $(INST_ARCHAUTODIR)/extralibs.ld blibdirs.ts \
 	  core.[0-9][0-9][0-9][0-9][0-9] *perl.core \
 	  core.*perl.*.? $(MAKE_APERL_FILE) \
-	  perl $(BASEEXT).def \
+	  $(BASEEXT).def perl \
 	  core.[0-9][0-9][0-9] mon.out \
-	  lib$(BASEEXT).def perlmain.c \
-	  perl.exe so_locations \
+	  lib$(BASEEXT).def perl.exe \
+	  perlmain.c so_locations \
 	  $(BASEEXT).exp 
 	- $(RM_RF) \
 	  blib 
@@ -497,7 +497,8 @@ clean :: clean_subdirs
 
 # --- MakeMaker realclean_subdirs section:
 realclean_subdirs :
-	$(NOECHO) $(NOOP)
+	- $(ABSPERLRUN)  -e 'chdir '\''Test-TAP-Model-0.07'\'';  system '\''$(MAKE) $(USEMAKEFILE) $(MAKEFILE_OLD) realclean'\'' if -f '\''$(MAKEFILE_OLD)'\'';' --
+	- $(ABSPERLRUN)  -e 'chdir '\''Test-TAP-Model-0.07'\'';  system '\''$(MAKE) $(USEMAKEFILE) $(FIRST_MAKEFILE) realclean'\'' if -f '\''$(FIRST_MAKEFILE)'\'';' --
 
 
 # --- MakeMaker realclean section:
@@ -514,13 +515,12 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) Generating META.yml
 	$(NOECHO) $(ECHO) '--- #YAML:1.0' > META_new.yml
 	$(NOECHO) $(ECHO) 'name:                Test-TAP-Model' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version:             0.07' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version:             0.08' >> META_new.yml
 	$(NOECHO) $(ECHO) 'abstract:            ~' >> META_new.yml
 	$(NOECHO) $(ECHO) 'license:             ~' >> META_new.yml
 	$(NOECHO) $(ECHO) 'generated_by:        ExtUtils::MakeMaker version 6.31' >> META_new.yml
 	$(NOECHO) $(ECHO) 'distribution_type:   module' >> META_new.yml
 	$(NOECHO) $(ECHO) 'requires:     ' >> META_new.yml
-	$(NOECHO) $(ECHO) '    Hash::AsObject:                0' >> META_new.yml
 	$(NOECHO) $(ECHO) '    Method::Alias:                 0' >> META_new.yml
 	$(NOECHO) $(ECHO) '    Test::Harness:                 2.64' >> META_new.yml
 	$(NOECHO) $(ECHO) '    Test::More:                    0.53' >> META_new.yml
@@ -781,7 +781,7 @@ $(MAP_TARGET) :: static $(MAKE_APERL_FILE)
 $(MAKE_APERL_FILE) : $(FIRST_MAKEFILE) pm_to_blib
 	$(NOECHO) $(ECHO) Writing \"$(MAKE_APERL_FILE)\" for this $(MAP_TARGET)
 	$(NOECHO) $(PERLRUNINST) \
-		Makefile.PL DIR= \
+		Makefile.PL DIR=Test-TAP-Model-0.07 \
 		MAKEFILE=$(MAKE_APERL_FILE) LINKTYPE=static \
 		MAKEAPERL=1 NORECURS=1 CCCDLFLAGS=
 
@@ -797,6 +797,9 @@ TESTDB_SW = -d
 testdb :: testdb_$(LINKTYPE)
 
 test :: $(TEST_TYPE)
+	$(NOECHO) $(ABSPERLRUN)  -e 'chdir '\''Test-TAP-Model-0.07'\'';  ' \
+	  -e 'system '\''$(MAKE) test $(PASTHRU)'\'' ' \
+	  -e '    if -f '\''$(FIRST_MAKEFILE)'\'';' --
 
 test_dynamic :: pure_all
 	PERL_DL_NONLAZY=1 $(FULLPERLRUN) "-MExtUtils::Command::MM" "-e" "test_harness($(TEST_VERBOSE), '$(INST_LIB)', '$(INST_ARCHLIB)')" $(TEST_FILES)
@@ -813,12 +816,11 @@ testdb_static :: testdb_dynamic
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd:
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0,07,0,0">' > $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0,08,0,0">' > $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <TITLE>$(DISTNAME)</TITLE>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <ABSTRACT></ABSTRACT>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <AUTHOR></AUTHOR>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <DEPENDENCY NAME="Hash-AsObject" VERSION="0,0,0,0" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <DEPENDENCY NAME="Method-Alias" VERSION="0,0,0,0" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <DEPENDENCY NAME="Test-Harness" VERSION="2,64,0,0" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <DEPENDENCY NAME="Test-More" VERSION="0,53,0,0" />' >> $(DISTNAME).ppd
@@ -834,11 +836,9 @@ ppd:
 pm_to_blib : $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', '\''$(PM_FILTER)'\'')' -- \
 	  lib/Test/TAP/Model/File.pm blib/lib/Test/TAP/Model/File.pm \
-	  lib/Test/TAP/Model/Subtest.pm blib/lib/Test/TAP/Model/Subtest.pm \
-	  lib/Test/TAP/.Model.pm.swp blib/lib/Test/TAP/.Model.pm.swp \
 	  lib/Test/TAP/Model.pm blib/lib/Test/TAP/Model.pm \
 	  lib/Test/TAP/Model/Consolidated.pm blib/lib/Test/TAP/Model/Consolidated.pm \
-	  lib/Test/TAP/Model/.File.pm.swp blib/lib/Test/TAP/Model/.File.pm.swp \
+	  lib/Test/TAP/Model/Subtest.pm blib/lib/Test/TAP/Model/Subtest.pm \
 	  example.pl $(INST_LIB)/Test/TAP/example.pl \
 	  lib/Test/TAP/Model/File/Consolidated.pm blib/lib/Test/TAP/Model/File/Consolidated.pm 
 	$(NOECHO) $(TOUCH) pm_to_blib
