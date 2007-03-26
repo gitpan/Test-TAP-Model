@@ -10,7 +10,7 @@ use Test::TAP::Model::File;
 
 use List::Util qw/sum/;
 
-our $VERSION = "0.08";
+our $VERSION = "0.09";
 
 # callback handlers
 sub _handle_bailout {
@@ -86,7 +86,7 @@ sub new_with_tests {
 	my $pkg = shift;
 	my @tests = @_;
 
-	my $self = $pkg->SUPER::new;
+	my $self = $pkg->new;
 	$self->run_tests(@tests);
 
 	$self;
@@ -96,7 +96,7 @@ sub new_with_struct {
 	my $pkg = shift;
 	my $meat = shift;
 
-	my $self = $pkg->SUPER::new(@_);
+	my $self = $pkg->new(@_);
 	$self->{meat} = $meat; # FIXME - the whole Test::Harness::Straps model can be figured out from this
 
 	$self;

@@ -56,11 +56,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = Test::TAP::Model
 NAME_SYM = Test_TAP_Model
-VERSION = 0.08
+VERSION = 0.09
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_08
+VERSION_SYM = 0_09
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.08
+XS_VERSION = 0.09
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -271,7 +271,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Test-TAP-Model
-DISTVNAME = Test-TAP-Model-0.08
+DISTVNAME = Test-TAP-Model-0.09
 
 
 # --- MakeMaker macro section:
@@ -515,7 +515,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) Generating META.yml
 	$(NOECHO) $(ECHO) '--- #YAML:1.0' > META_new.yml
 	$(NOECHO) $(ECHO) 'name:                Test-TAP-Model' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version:             0.08' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version:             0.09' >> META_new.yml
 	$(NOECHO) $(ECHO) 'abstract:            ~' >> META_new.yml
 	$(NOECHO) $(ECHO) 'license:             ~' >> META_new.yml
 	$(NOECHO) $(ECHO) 'generated_by:        ExtUtils::MakeMaker version 6.31' >> META_new.yml
@@ -816,7 +816,7 @@ testdb_static :: testdb_dynamic
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd:
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0,08,0,0">' > $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0,09,0,0">' > $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <TITLE>$(DISTNAME)</TITLE>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <ABSTRACT></ABSTRACT>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <AUTHOR></AUTHOR>' >> $(DISTNAME).ppd
